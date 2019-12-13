@@ -46,13 +46,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body {
-    background-color: lightcoral;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-    font-size: 30px;
-    color: green;
-}
+
 
 /*# sourceMappingURL=bundle.css.map*/

@@ -185,7 +185,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/styles.scss */ "./src/sass/styles.scss");
 /* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__);
 
-console.log('Holaaaaa Pepa');
+var canvas = document.querySelector('#draw');
+var ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ctx.strokeStyle = '#BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 1;
+var isDrawing = false;
+var lastX = 0;
+var lastY = 0;
+var hue = 0;
+var direction = true;
+
+function draw(e) {
+  if (!isDrawing) return;
+  ctx.strokeStyle = "hsl(".concat(hue, ", 100%, 50%)");
+  ctx.lineWidth += 0.2;
+  ctx.beginPath(); // start from
+
+  ctx.moveTo(lastX, lastY); // go to
+
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+  var _ref = [e.offsetX, e.offsetY];
+  lastX = _ref[0];
+  lastY = _ref[1];
+  hue++;
+
+  if (hue >= 360) {
+    hue = 0;
+  }
+
+  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    console.log('cambio!');
+    direction = !direction;
+  }
+
+  if (direction) {
+    ctx.lineWidth++;
+  } else {
+    ctx.lineWidth--;
+  }
+}
+
+;
+canvas.addEventListener('mousedown', function (e) {
+  var _ref2;
+
+  isDrawing = true, (_ref2 = [e.offsetX, e.offsetY], lastX = _ref2[0], lastY = _ref2[1], _ref2);
+});
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', function () {
+  return isDrawing = false;
+});
+canvas.addEventListener('mouseout', function () {
+  return isDrawing = false;
+});
+console.log(canvas);
 
 /***/ }),
 
